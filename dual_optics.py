@@ -139,6 +139,12 @@ class optics:
 
         return self.__clusters
 
+    def get_labels(self):
+        labels = [-1 for _ in range(len(self.__sample_pointer))]
+        for i, x in enumerate(self.__clusters):
+            for ix in x:
+                labels[ix] = i
+        return labels
 
     def get_noise(self):
         """!
@@ -303,7 +309,7 @@ class optics:
             if (index == optic_object.index_object):
                 continue
 
-            distance = self.distance(self.__sample_pointer[optic_object.index_object], self.__sample_pointer[index])
+            distance = self.__distance(self.__sample_pointer[optic_object.index_object], self.__sample_pointer[index])
             if (distance <= self.__eps):
                 neighbor_description.append( [index, distance] )
 
